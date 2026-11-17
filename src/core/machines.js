@@ -221,5 +221,52 @@ export const MachineHandler = {
     // fixed interval the difference between current jM to max jM should decrease by a factor of 1/2.
     return Decimal.max(0, new Decimal(Decimal.log2(jmCap.div(jmCap.sub(cost)))).sub(
       Decimal.log2(jmCap.div(jmCap.sub(currentDM))))).times(this.scaleTimeForDM);
+  },
+
+  get isQMUnlocked() {
+    return Currency.dualMachines.value.gte(this.hardcapDM) || Currency.quaternionMachines.gt(0);
+  },
+
+  get baseQMCap() {
+    return this.uncappedDM.add(1).log10().div(1000).pow(0.25).sub(1).times(20);
+  },
+
+  get currentQMCap() {
+    return player.reality.kMCap;
+  },
+
+  // This is kM cap based on in-game values at that instant, may be lower than the actual cap
+  get projectedQMCap() {
+    return this.baseQMCap;
+  },
+
+  // Use QMCap to store the base cap; applying multipliers separately avoids some design issues the 3xTP upgrade has
+  updateQMCap() {
+    if (this.uncappedDM.gte(this.baseDMCap)) {
+      if (this.baseQMCap.gt(player.reality.kMCap)) {
+        player.reality.kMCap = this.baseQMCap;
+      }
+    }
+  },
+
+  // Time in seconds to reduce the missing amount by a factor of two
+  get scaleTimeForQM() {
+    return 3600;
+  },
+
+  gainedQuaternionMachines(diff) {
+    return (this.currentQMCap.sub(Currency.quaternionMachines.value)).times(
+      new Decimal(1).sub(Decimal.pow(2, new Decimal(0).sub(diff).div(1000).div(this.scaleTimeForQM))));
+  },
+
+  estimateQMTimer(cost) {
+    const kmCap = this.currentQMCap;
+    if (kmCap.lte(cost)) return Infinity;
+    const currentQM = Currency.quaternionMachines.value;
+    // This is doing log(a, 1/2) - log(b, 1/2) where a is % left to kmCap of cost and b is % left to kmCap of current
+    // kM. log(1 - x, 1/2) should be able to estimate the time taken for kM to increase from 0 to kmCap * x since every
+    // fixed interval the difference between current kM to max kM should decrease by a factor of 1/2.
+    return Decimal.max(0, new Decimal(Decimal.log2(kmCap.div(kmCap.sub(cost)))).sub(
+      Decimal.log2(kmCap.div(kmCap.sub(currentQM))))).times(this.scaleTimeForQM);
   }
 };
