@@ -51,6 +51,7 @@ import PelleDestructionTab from "./celestial-pelle/PelleDestructionTab";
 import PelleTab from "./celestial-pelle/PelleTab";
 import PerksTab from "./perks/PerksTab";
 import PreviousSpeedrunTab from "./speedrun-milestones/PreviousSpeedrunTab";
+import QuaternaryUpgradesTab from "./quaternary-upgrades/QuaternaryUpgradesTab";
 import RaTab from "./celestial-ra/RaTab";
 import RealityUpgradesTab from "./reality-upgrades/RealityUpgradesTab";
 import ReplicantiTab from "./replicanti/ReplicantiTab";
@@ -113,6 +114,7 @@ const TabComponents = {
   RealityUpgradesTab,
   ImaginaryUpgradesTab,
   DualityUpgradesTab,
+  QuaternaryUpgradesTab,
   PerksTab,
   BlackHoleTab,
   AlchemyTab,
