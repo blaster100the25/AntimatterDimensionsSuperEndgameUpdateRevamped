@@ -7,6 +7,7 @@ import { glyphCosmeticSets } from "./glyph-cosmetics";
 import { glyphEffects } from "./glyph-effects";
 import { glyphSacrifice } from "./glyph-sacrifices";
 import { imaginaryUpgrades } from "./imaginary-upgrades";
+import { quaternaryUpgrades } from "./quaternary-upgrades";
 import { realityUpgrades } from "./reality-upgrades";
 
 export const reality = {
@@ -20,5 +21,6 @@ export const reality = {
   imaginaryUpgrades,
   perks,
   perkConnections,
+  quaternaryUpgrades,
   upgrades: realityUpgrades
 };
