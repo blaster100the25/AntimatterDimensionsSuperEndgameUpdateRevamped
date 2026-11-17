@@ -681,6 +681,8 @@ window.player = {
     iMCap: DC.D0,
     dualMachines: DC.D0,
     jMCap: DC.D0,
+    quaternionMachines: DC.D0,
+    kMCap: DC.D0,
     glyphs: {
       active: [],
       inventory: [],
@@ -766,10 +768,25 @@ window.player = {
       9: 0,
       10: 0,
     },
+    quaternaryUpgradeBits: 0,
+    quaternaryUpgReqs: 0,
+    quaternaryRebuyables: {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0,
+      10: 0,
+    },
     reqLock: {
       reality: 0,
       imaginary: 0,
-      duality: 0
+      duality: 0,
+      quaternary: 0
     },
     perks: new Set(),
     respec: false,
